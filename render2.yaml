@@ -1,3 +1,10 @@
+databases:
+  - name: arduino_web_db
+    databaseName: arduino_web_db
+    user: Eggplant
+    region: singapore
+    plan: free
+
 services:
   - type: web
     name: arduino_web
