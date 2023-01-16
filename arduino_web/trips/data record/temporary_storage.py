@@ -1,0 +1,21 @@
+
+
+DATE = ""
+TIME = ""
+DATE = ""
+TIME = ""
+WDIR = ""
+WDSD = ""
+TEMP = ""
+HUMD = ""
+H_24R = ""
+D_TX = ""
+D_TXT = ""
+D_TN = ""
+D_TNT = ""
+
+A_Temperature = ""
+A_Humandity = ""
+A_PM25 = ""
+A_Co2 = ""
+A_TVOC = ""

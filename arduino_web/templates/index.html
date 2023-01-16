@@ -1,0 +1,1301 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	
+-->
+<html>
+	<head>
+		{% load static %}
+		<title>植物園</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--css 連結-->
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+		<link href="{% static 'assets/css/fontawesome-all.min.css' %}" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.5/vue.global.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+		<!-- 插畫風格的bar條 -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1/dist/chart.xkcd.min.js"></script>
+		
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header  -->
+					<header id="header">
+						<div class="logo">
+							<i class="fas fa-cat" style="font-size: xx-large;"></i>
+						</div>
+						<div class="content">
+							<div class= content_roof ></div>
+							<div class="inner">
+								<h1>植物園 歡迎您</h1>
+							</div>
+
+							<div class = mario_world>
+								<span class = mario_l></span>
+								<span class = goomba_0></span>
+								<span class = sky_rock_coin></span>
+								<span class = rock_hill></span>
+								<span class = flag></span>
+								<div class= content_floor > </div>
+							</div>
+
+						</div>
+						<nav>
+							<ul>
+								<li><div class= page_tube_re></div><a href="#intro">我的房間</a></li>
+								<li><div class= page_tube_bl></div><a href="#work">天氣資訊</a></li>
+								<li><div class= page_tube_gr></div><a href="#about">環境評估</a></li>
+								<li><div class= page_tube_ye></div><a href="#contact">天氣預報</a></li>
+								<li><div class= page_tube_pe></div><a href="#elements">資料統計</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- 房間資訊 -->
+							<article id="intro">
+								<h2 class="major">房間資訊 {{room_data.time}}</h2>
+								<div class="room_bg">
+
+									<div class= mario></div>
+									
+									<div class = room>
+										<div class = ani_room>
+											<div class= room_top></div>
+											<div class = room_wall>
+												<span style="--i:0;"></span>
+												<span style="--i:1;"></span>
+												<span style="--i:2;"></span>
+												<span style="--i:3;"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="room_data_bg">
+									<div class = "room_data_logo1"></div>
+										<!--<div class = room_data_content> -->
+									<p class="item_intro"><strong>氣溫: </strong>&nbsp{{room_data.arduino_room.溫度}}&#8451;</p>
+								</div>
+								<div class="room_data_bg">
+									<div class = "room_data_logo2"></div>
+										<!--<div class = room_data_content> -->
+									<p class="item_intro"><strong>濕度: </strong>&nbsp{{room_data.arduino_room.濕度}} %</p>
+								</div>
+								<div class="room_data_bg">
+									<div class = "room_data_logo3"></div>
+										<!--<div class = room_data_content> -->
+									<p class="item_intro"><strong>CO2: </strong>&nbsp{{room_data.arduino_room.co2}} ppm</p>
+								</div>
+								<div class="room_data_bg">
+									<div class = "room_data_logo4"></div>
+										<!--<div class = room_data_content> -->
+									<p class="item_intro"><strong>PM2.5: </strong>&nbsp{{room_data.arduino_room.pm2_5}} μg/m3</p>
+								</div>
+								<div class="room_data_bg">
+									<div class = "room_data_logo5"></div>
+										<!--<div class = room_data_content> -->
+									<p class="item_intro"><strong>有害氣體: </strong>&nbsp{{room_data.arduino_room.tvoc}} ppb</p>
+								</div>
+							
+							
+							</article>
+
+						<!-- 天氣資訊 -->
+							<article id="work">
+								<h2 class="major">天氣資訊 -{{weather_level.天氣現象}} </h2>
+								<h3 style="font-size:1rem; margin: 0;">{{local_data.時間}}</h3>
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_temp-f">
+											<p class="item_intro"><strong>氣溫: </strong>&nbsp{{local_data.weather_now.氣溫}}&#8451;</p>
+										</div>
+									
+										<div class="flip-card-back poker_temp-b">
+											<p class="item_intro"><strong>理想45 ~ 65&#8451;</strong></p>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_humid-f">
+											<p class="item_intro"><strong>濕度: </strong>&nbsp{{local_data.weather_now.濕度}}%</p>
+										</div>
+										<div class="flip-card-back poker_humid-b">
+											<p class="item_intro"><strong>理想45 ~ 65%</strong></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_wind-f">
+											<p><strong>風向: </strong>&nbsp{{local_data.weather_now.風向}}度</p>
+										</div>
+										<div class="flip-card-back poker_wind-b">
+											<p><strong>風速: &nbsp{{local_data.weather_now.風速}}&nbsps/m</strong></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_pm25-f">
+											<p class="item_intro"><strong>PM2.5: </strong>&nbsp{{local_data.weather_now.PM2_5}}μg/m3</p>
+										</div>
+										<div class="flip-card-back poker_pm25-b">
+											<p class="item_intro"><b>超過10有害健康</b></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_uv-f">
+											<p class="item_intro"><strong>紫外線: </strong>&nbsp{{local_data.weather_now.紫外線}}UV</p>
+										</div>
+										<div class="flip-card-back poker_uv-b">
+											<p class="item_intro"><b>8+過量,11+危險</b></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_24hr-f">
+											<p class="item_intro"><strong>H_24R: </strong>&nbsp{{local_data.weather_now.H_24R}}mm</p>
+										</div>
+										<div class="flip-card-back poker_24hr-b">
+											<p class="item_intro"><b>紀錄當前的雨量</b></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_hot_sun-f">
+											<p class="item_intro"><strong>最高溫: </strong>&nbsp{{local_data.weather_now.最高溫度}}&#8451;</p>
+										</div>
+										<div class="flip-card-back poker_hot_sun-b">
+											<p class="item_intro"><b>出現於{{local_data.weather_now.高溫時間}}</b></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="flip-card click " onclick="open_logo_Click(this)">
+									<div class="flip-card-inner">
+										<div class="flip-card-front poker_cold_sun-f">
+											<p class="item_intro"><strong>最低溫: </strong>&nbsp{{local_data.weather_now.最低溫度}}&#8451;</p>
+										</div>
+										<div class="flip-card-back poker_cold_sun-b">
+											<p class="item_intro"><b>出現於{{local_data.weather_now.低溫時間}}</b></p>
+										</div>
+									</div>
+								</div>
+
+								
+								<script>
+									function open_logo_Click(e) {
+										e.classList.toggle('clicked');
+									}
+								</script>
+
+								<div class="clearfix"></div>
+								
+								<!-- <p>{{ local_data }}</p> -->
+								
+							</article>
+
+						<!-- About images/pic03.jpg -->
+							<article id="about">
+								<h2 class="major">環境評估</h2>
+								<section>
+									<div class=elements_main_select>
+										<div class="elements_main_select_outer_left">
+											<div class="elements_main_select_inner_left"><a href="#main_do">資料詳解</a></div>
+										</div>
+										<div class="elements_main_select_outer_right">
+											<div class="elements_main_select_inner_right"><a href="#say_something">資料解說</a></div>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<hr/>
+									<blockquote>本系統提供室外天氣和室內環境的資訊，下方給予數值比較和對室內環境的建議。</blockquote>
+									
+									<h3 class="major" id="main_do">分析</h3>
+									<ul>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">資料詳解</h3>
+									<div style="position:relative; display: flex;">
+										<div class="color_in"></div>
+										<b style="margin-right: 2rem;">室內</b>
+										<div class="color_out"></div>
+										<b>室外</b>
+									</div>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>項目</th>
+													<th>評估方式</th>
+													<th>數值</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>溫&濕度</td>
+													<td> 酷熱指數 </td>
+													<td>
+														<b style="color: rgb(99, 161, 36); ">{{in_danger_tab}}</b><br>
+														<b style="color: rgb(219, 175, 17);">{{out_danger_tab}}</b>
+													</td>
+												</tr>
+												<tr>
+													<td>PM2.5</td>
+													<td>世界衛生組織<br>懸浮微粒濃度標準</td>
+													<td>
+														<b style="color: rgb(99, 161, 36);">{{in_pm25_concentration}}</b><br>
+														<b style="color: rgb(219, 175, 17);">{{out_pm25_concentration}}</b>
+													</td>
+												</tr>
+												<tr>
+													<td>CO2</td>
+													<td> 室內二氧化碳濃度<br>於人體的影響</td>
+													<td>
+														<b style="color: rgb(99, 161, 36);">{{in_co2_inside}}</b><br>
+													</td>
+												</tr>
+												<tr>
+													<td>紫外線</td>
+													<td>世界衛生組織<br>紫外線輻射量強度</td>
+													<td>
+														<b style="color: rgb(219, 175, 17);">{{out_uv_outside}}</b><br>
+													</td>
+												</tr>
+												<tr>
+													<td>有害廢氣</td>
+													<td>揮發性有機化合物<br>於人體的影響</td>
+													<td>
+														<b style="color: rgb(99, 161, 36);">{{in_tvoc_inside}}</b><br>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+								</section>
+
+								<section>
+									<h3 class="major" id="say_something">資料解說</h3>
+									<blockquote>
+									<b>有害廢氣( TVOC ):</b> <br>
+									揮發性有機物的危害很明顯，當居室中揮發性有機物濃度超過一定濃度時，在短時間內人們感到頭痛、噁心、嘔吐、四肢乏力；嚴重時會抽搐、昏迷、記憶力減退。揮發性有機物傷害人的肝臟、腎臟、大腦和神經系統，其中還包含了很多致癌物質。室內空氣被揮發性有機物污染已引起各國重視。
+
+
+									</blockquote>
+									
+								</section>
+
+
+							</article>
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">天氣預報 -{{weather_level.舒適度}}</h2>
+								<!-- vue script -->
+								<div id="main_photo"><change-weather-photo></change-weather-photo></div>
+								
+								<div id="weather_predict_bar"><weather-bar></weather-bar></div>
+
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</article>
+
+						<!-- Elements -->
+							<article id="elements">
+								<section>
+									<h2 id="data_statistics" class="major">資料統計</h2>
+									<div class= "elements_statistics_mix">
+										<div>
+											<a href="#tempp">溫度</a>
+										</div>
+										<div>
+											<a href="#humidd">濕度</a>
+										</div>
+										<div>
+											<a href="#pm255">Pm2.5</a>
+										</div>
+									</div>
+									<div class="elements_statistics">
+										<div>
+											<dl>
+												<dt><strong><b>戶外環境</b></strong></dt>
+												<dd class= "elements_statistics_dl"><a href="#uvv">- 紫外線</a></dd>
+												<dd class= "elements_statistics_dl"><a href="#rain_windd">- 雨量/風速</a></dd>
+											</dl>
+										</div>
+										<div>
+											<dl>
+												<dt><strong><b>室內環境</b></strong></dt>
+												<dd class= "elements_statistics_dl"><a href="#co22">- Co2</a></dd>
+												<dd class= "elements_statistics_dl"><a href="#bad_airr">- 有害氣體</a></dd>
+											</dl>
+										</div>
+
+									</div>
+									<hr />
+									
+									<h2>環境比較</h2>
+									<h3 id="tempp">溫度</h3>
+									<div class ="temp_chart_index" style=" position:relative">
+										<div style="justify-content: center; width: 100%;  display: block; position:relative ">
+											<svg id="Temperature_chart01" style="position:absolute; z-index=7 top=0;left=0;"></svg>
+											<script>
+												const tempt_chart01 = document.querySelector('#Temperature_chart01');
+												new chartXkcd.Line(tempt_chart01, {
+													title: '每日高低溫度', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [
+														{
+														label: '室內-高',
+														data: [{{everyday_Room_hi.7.溫度}}, {{everyday_Room_hi.6.溫度}}, {{everyday_Room_hi.5.溫度}}, {{everyday_Room_hi.4.溫度}}, {{everyday_Room_hi.3.溫度}}, {{everyday_Room_hi.2.溫度}}, {{everyday_Room_hi.1.溫度}}, {{everyday_Room_hi.0.溫度}}],
+													},{
+														label: '室內-低',
+														data: [{{everyday_Room_lo.7.溫度}}, {{everyday_Room_lo.6.溫度}}, {{everyday_Room_lo.5.溫度}}, {{everyday_Room_lo.4.溫度}}, {{everyday_Room_lo.3.溫度}}, {{everyday_Room_lo.2.溫度}}, {{everyday_Room_lo.1.溫度}}, {{everyday_Room_lo.0.溫度}}],
+													},{
+														label: '室外-高',
+														data:  [{{everyday_local_hi.7.氣溫}}, {{everyday_local_hi.6.氣溫}}, {{everyday_local_hi.5.氣溫}}, {{everyday_local_hi.4.氣溫}}, {{everyday_local_hi.3.氣溫}}, {{everyday_local_hi.2.氣溫}}, {{everyday_local_hi.1.氣溫}}, {{everyday_local_hi.0.氣溫}}],
+													},{
+														label: '室外-低',
+														data: [{{everyday_local_lo.7.氣溫}}, {{everyday_local_lo.6.氣溫}}, {{everyday_local_lo.5.氣溫}}, {{everyday_local_lo.4.氣溫}}, {{everyday_local_lo.3.氣溫}}, {{everyday_local_lo.2.氣溫}}, {{everyday_local_lo.1.氣溫}}, {{everyday_local_lo.0.氣溫}}],
+													}
+													],
+													},
+													options: { 
+													dataColors: ["#f40707","#0441f5","#b904f5","#04b5f5"],
+													yTickCount: 2,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart02" style="position:absolute ; top=0;left=0;z-index=8"></svg>
+											<script>
+												const tempt_chart02 = document.querySelector('#Temperature_chart02');
+												new chartXkcd.Line(tempt_chart02, {
+													title: '每天平均溫度', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{everyday_Room_average.7.溫度}}, {{everyday_Room_average.6.溫度}}, {{everyday_Room_average.5.溫度}}, {{everyday_Room_average.4.溫度}}, {{everyday_Room_average.3.溫度}}, {{everyday_Room_average.2.溫度}}, {{everyday_Room_average.1.溫度}}, {{everyday_Room_average.0.溫度}} ],
+													}, {
+														label: '室外',
+														data: [ {{everyday_local_average.7.氣溫}}, {{everyday_local_average.6.氣溫}}, {{everyday_local_average.5.氣溫}}, {{everyday_local_average.4.氣溫}}, {{everyday_local_average.3.氣溫}}, {{everyday_local_average.2.氣溫}}, {{everyday_local_average.1.氣溫}}, {{everyday_local_average.0.氣溫}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart03" style="position:absolute ; top=0;left=0; z-index=9"></svg>
+											<script>
+												const tempt_chart03 = document.querySelector('#Temperature_chart03');
+												new chartXkcd.Line(tempt_chart03, {
+													title: '每天 '+{{now_time}}+'時的溫度', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{now_time_Roomdata.7.溫度}}, {{now_time_Roomdata.6.溫度}}, {{now_time_Roomdata.5.溫度}}, {{now_time_Roomdata.4.溫度}}, {{now_time_Roomdata.3.溫度}}, {{now_time_Roomdata.2.溫度}}, {{now_time_Roomdata.1.溫度}}, {{now_time_Roomdata.0.溫度}}],
+													}, {
+														label: '室外',
+														data: [ {{now_time_localdata.7.氣溫}}, {{now_time_localdata.6.氣溫}}, {{now_time_localdata.5.氣溫}}, {{now_time_localdata.4.氣溫}}, {{now_time_localdata.3.氣溫}}, {{now_time_localdata.2.氣溫}}, {{now_time_localdata.1.氣溫}}, {{now_time_localdata.0.氣溫}} ],
+													}],
+													},
+													options: { 
+													//backgroundColor: '#789b73',
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+										</div>
+										<div style="position:relative; top:100%; justify-content: center; width: 100%; display: flex;" >
+											<div id="dot1" class="change_dot" onclick="changeColor1()" style="background-color: green;" ></div>
+											<div id="dot2" class="change_dot" onclick="changeColor2()" ></div>
+											<div id="dot3" class="change_dot" onclick="changeColor3()" ></div>
+										</div>
+										
+										<script>
+											var temp_light_gate=0;
+											const BTN1 = document.querySelector('#dot1');
+											const BTN2 = document.querySelector('#dot2');
+											const BTN3 = document.querySelector('#dot3');
+											const Tempt_chart02 = document.querySelector('#Temperature_chart02');
+											const Tempt_chart03 = document.querySelector('#Temperature_chart03');
+
+											function changeColor1() {
+												BTN1.style.background = (BTN1.style.background == "green")?'green':'green';
+											}
+											function changeColor2() {
+												if(temp_light_gate == 0){
+													if(BTN2.style.background == "white"){
+														BTN2.style.background = "yellow";
+														Tempt_chart03.style.display = 'none';
+													}else{
+														BTN2.style.background = "white";
+														Tempt_chart03.style.display = 'block';
+													}
+												}
+											}
+											function changeColor3() {
+												if(BTN2.style.background == "yellow"){
+													if(BTN3.style.background == "white"){
+														BTN3.style.background = "red";
+														Tempt_chart02.style.display = 'none';
+														temp_light_gate = 1;
+													}else{
+														BTN3.style.background = 'white';
+														Tempt_chart02.style.display = "block";
+														temp_light_gate = 0;
+													}
+												}
+											}
+										</script>
+									</div>
+									
+									<div class="mid_line">-</div>
+									<h3 id="humidd">濕度</h3>
+									<div class ="temp_chart_index" style=" position:relative">
+										<div style="justify-content: center; width: 100%;  display: block; position:relative ">
+											<svg id="Temperature_chart04" style="position:absolute; z-index=7 top=0;left=0;"></svg>
+											<script>
+												const tempt_chart04 = document.querySelector('#Temperature_chart04');
+												new chartXkcd.Line(tempt_chart04, {
+													title: '每日高低濕度', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [
+														{
+														label: '室內-高',
+														data: [{{everyday_Room_hi.7.濕度}}, {{everyday_Room_hi.6.濕度}}, {{everyday_Room_hi.5.濕度}}, {{everyday_Room_hi.4.濕度}}, {{everyday_Room_hi.3.濕度}}, {{everyday_Room_hi.2.濕度}}, {{everyday_Room_hi.1.濕度}}, {{everyday_Room_hi.0.濕度}}],
+													},{
+														label: '室內-低',
+														data: [{{everyday_Room_lo.7.濕度}}, {{everyday_Room_lo.6.濕度}}, {{everyday_Room_lo.5.濕度}}, {{everyday_Room_lo.4.濕度}}, {{everyday_Room_lo.3.濕度}}, {{everyday_Room_lo.2.濕度}}, {{everyday_Room_lo.1.濕度}}, {{everyday_Room_lo.0.濕度}}],
+													},{
+														label: '室外-高',
+														data: [{{everyday_local_hi.7.濕度}}, {{everyday_local_hi.6.濕度}}, {{everyday_local_hi.5.濕度}}, {{everyday_local_hi.4.濕度}}, {{everyday_local_hi.3.濕度}}, {{everyday_local_hi.2.濕度}}, {{everyday_local_hi.1.濕度}}, {{everyday_local_hi.0.濕度}}],
+													},{
+														label: '室外-低',
+														data: [{{everyday_local_lo.7.濕度}}, {{everyday_local_lo.6.濕度}}, {{everyday_local_lo.5.濕度}}, {{everyday_local_lo.4.濕度}}, {{everyday_local_lo.3.濕度}}, {{everyday_local_lo.2.濕度}}, {{everyday_local_lo.1.濕度}}, {{everyday_local_lo.0.濕度}}],
+													}
+													],
+													},
+													options: { 
+													dataColors: ["#f40707","#0441f5","#b904f5","#04b5f5"],
+													yTickCount: 2,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart05" style="position:absolute ; top=0;left=0;z-index=8"></svg>
+											<script>
+												const tempt_chart05 = document.querySelector('#Temperature_chart05');
+												new chartXkcd.Line(tempt_chart05, {
+													title: '每天平均濕度', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{everyday_Room_average.7.濕度}}, {{everyday_Room_average.6.濕度}}, {{everyday_Room_average.5.濕度}}, {{everyday_Room_average.4.濕度}}, {{everyday_Room_average.3.濕度}}, {{everyday_Room_average.2.濕度}}, {{everyday_Room_average.1.濕度}}, {{everyday_Room_average.0.濕度}} ],
+													}, {
+														label: '室外',
+														data: [ {{everyday_local_average.7.濕度}}, {{everyday_local_average.6.濕度}}, {{everyday_local_average.5.濕度}}, {{everyday_local_average.4.濕度}}, {{everyday_local_average.3.濕度}}, {{everyday_local_average.2.濕度}}, {{everyday_local_average.1.濕度}}, {{everyday_local_average.0.濕度}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart06" style="position:absolute ; top=0;left=0; z-index=9"></svg>
+											<script>
+												const tempt_chart06 = document.querySelector('#Temperature_chart06');
+												new chartXkcd.Line(tempt_chart06, {
+													title: '每天 '+{{now_time}}+'時的濕度', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{now_time_Roomdata.7.濕度}}, {{now_time_Roomdata.6.濕度}}, {{now_time_Roomdata.5.濕度}}, {{now_time_Roomdata.4.濕度}}, {{now_time_Roomdata.3.濕度}}, {{now_time_Roomdata.2.濕度}}, {{now_time_Roomdata.1.濕度}}, {{now_time_Roomdata.0.濕度}}],
+													}, {
+														label: '室外',
+														data: [ {{now_time_localdata.7.濕度}}, {{now_time_localdata.6.濕度}}, {{now_time_localdata.5.濕度}}, {{now_time_localdata.4.濕度}}, {{now_time_localdata.3.濕度}}, {{now_time_localdata.2.濕度}}, {{now_time_localdata.1.濕度}}, {{now_time_localdata.0.濕度}} ],
+													}],
+													},
+													options: { 
+													//backgroundColor: '#789b73',
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+										</div>
+										<div style="position:relative; top:100%; justify-content: center; width: 100%; display: flex;" >
+											<div id="dot4" class="change_dot" onclick="changeColor4()" style="background-color: green;" ></div>
+											<div id="dot5" class="change_dot" onclick="changeColor5()" ></div>
+											<div id="dot6" class="change_dot" onclick="changeColor6()" ></div>
+										</div>
+										<script>
+											var temp_light_gate1=0;
+											const BTN4 = document.querySelector('#dot4');
+											const BTN5 = document.querySelector('#dot5');
+											const BTN6 = document.querySelector('#dot6');
+											const Tempt_chart05 = document.querySelector('#Temperature_chart05');
+											const Tempt_chart06 = document.querySelector('#Temperature_chart06');
+
+											function changeColor4() {
+												BTN4.style.background = (BTN4.style.background == "green")?'green':'green';
+											}
+											function changeColor5() {
+												if(temp_light_gate1 == 0){
+													if(BTN5.style.background == "white"){
+														BTN5.style.background = "yellow";
+														Tempt_chart06.style.display = 'none';
+													}else{
+														BTN5.style.background = "white";
+														Tempt_chart06.style.display = 'block';
+													}
+												}
+											}
+											function changeColor6() {
+												if(BTN5.style.background == "yellow"){
+													if(BTN6.style.background == "white"){
+														BTN6.style.background = "red";
+														Tempt_chart05.style.display = 'none';
+														temp_light_gate1 = 1;
+													}else{
+														BTN6.style.background = 'white';
+														Tempt_chart05.style.display = "block";
+														temp_light_gate1 = 0;
+													}
+												}
+											}
+										</script>
+									</div>
+						
+									<div class="mid_line">-</div>
+									<h3 id="pm255">PM2.5</h3>
+									<div class ="temp_chart_index" style=" position:relative">
+										<div style="justify-content: center; width: 100%;  display: block; position:relative ">
+											<svg id="Temperature_chart07" style="position:absolute; z-index=7 top=0;left=0;"></svg>
+											<script>
+												const tempt_chart07 = document.querySelector('#Temperature_chart07');
+												new chartXkcd.Line(tempt_chart07, {
+													title: '每日高低PM2.5', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [
+														{
+														label: '室內-高',
+														data: [{{everyday_Room_hi.7.pm2_5}}, {{everyday_Room_hi.6.pm2_5}}, {{everyday_Room_hi.5.pm2_5}}, {{everyday_Room_hi.4.pm2_5}}, {{everyday_Room_hi.3.pm2_5}}, {{everyday_Room_hi.2.pm2_5}}, {{everyday_Room_hi.1.pm2_5}}, {{everyday_Room_hi.0.pm2_5}}],
+													},{
+														label: '室內-低',
+														data: [{{everyday_Room_lo.7.pm2_5}}, {{everyday_Room_lo.6.pm2_5}}, {{everyday_Room_lo.5.pm2_5}}, {{everyday_Room_lo.4.pm2_5}}, {{everyday_Room_lo.3.pm2_5}}, {{everyday_Room_lo.2.pm2_5}}, {{everyday_Room_lo.1.pm2_5}}, {{everyday_Room_lo.0.pm2_5}}],
+													},{
+														label: '室外-高',
+														data: [{{everyday_local_hi.7.PM2_5}}, {{everyday_local_hi.6.PM2_5}}, {{everyday_local_hi.5.PM2_5}}, {{everyday_local_hi.4.PM2_5}}, {{everyday_local_hi.3.PM2_5}}, {{everyday_local_hi.2.PM2_5}}, {{everyday_local_hi.1.PM2_5}}, {{everyday_local_hi.0.PM2_5}}],
+													},{
+														label: '室外-低',
+														data: [{{everyday_local_lo.7.PM2_5}}, {{everyday_local_lo.6.PM2_5}}, {{everyday_local_lo.5.PM2_5}}, {{everyday_local_lo.4.PM2_5}}, {{everyday_local_lo.3.PM2_5}}, {{everyday_local_lo.2.PM2_5}}, {{everyday_local_lo.1.PM2_5}}, {{everyday_local_lo.0.PM2_5}}],
+													}
+													],
+													},
+													options: { 
+													dataColors: ["#f40707","#0441f5","#b904f5","#04b5f5"],
+													yTickCount: 2,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart08" style="position:absolute ; top=0;left=0;z-index=8"></svg>
+											<script>
+												const tempt_chart08 = document.querySelector('#Temperature_chart08');
+												new chartXkcd.Line(tempt_chart08, {
+													title: '每天平均PM2.5', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{everyday_Room_average.7.pm2_5}}, {{everyday_Room_average.6.pm2_5}}, {{everyday_Room_average.5.pm2_5}}, {{everyday_Room_average.4.pm2_5}}, {{everyday_Room_average.3.pm2_5}}, {{everyday_Room_average.2.pm2_5}}, {{everyday_Room_average.1.pm2_5}}, {{everyday_Room_average.0.pm2_5}} ],
+													}, {
+														label: '室外',
+														data: [ {{everyday_local_average.7.PM2_5}}, {{everyday_local_average.6.PM2_5}}, {{everyday_local_average.5.PM2_5}}, {{everyday_local_average.4.PM2_5}}, {{everyday_local_average.3.PM2_5}}, {{everyday_local_average.2.PM2_5}}, {{everyday_local_average.1.PM2_5}}, {{everyday_local_average.0.PM2_5}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart09" style="position:absolute ; top=0;left=0; z-index=9"></svg>
+											<script>
+												const tempt_chart09 = document.querySelector('#Temperature_chart09');
+												new chartXkcd.Line(tempt_chart09, {
+													title: '每天 '+{{now_time}}+'時的PM2.5', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{now_time_Roomdata.7.pm2_5}}, {{now_time_Roomdata.6.pm2_5}}, {{now_time_Roomdata.5.pm2_5}}, {{now_time_Roomdata.4.pm2_5}}, {{now_time_Roomdata.3.pm2_5}}, {{now_time_Roomdata.2.pm2_5}}, {{now_time_Roomdata.1.pm2_5}}, {{now_time_Roomdata.0.pm2_5}} ],
+													}, {
+														label: '室外',
+														data: [ {{now_time_localdata.7.PM2_5}} , {{now_time_localdata.6.PM2_5}}, {{now_time_localdata.5.PM2_5}}, {{now_time_localdata.4.PM2_5}}, {{now_time_localdata.3.PM2_5}}, {{now_time_localdata.2.PM2_5}}, {{now_time_localdata.1.PM2_5}}, {{now_time_localdata.0.PM2_5}}],
+													}],
+													},
+													options: { 
+													//backgroundColor: '#789b73',
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+										</div>
+										<div style="position:relative; top:100%; justify-content: center; width: 100%; display: flex;" >
+											<div id="dot7" class="change_dot" onclick="changeColor7()" style="background-color: green;" ></div>
+											<div id="dot8" class="change_dot" onclick="changeColor8()" ></div>
+											<div id="dot9" class="change_dot" onclick="changeColor9()" ></div>
+										</div>
+										<script>
+											var temp_light_gate2=0;
+											const BTN7 = document.querySelector('#dot7');
+											const BTN8 = document.querySelector('#dot8');
+											const BTN9 = document.querySelector('#dot9');
+											const Tempt_chart08 = document.querySelector('#Temperature_chart08');
+											const Tempt_chart09 = document.querySelector('#Temperature_chart09');
+
+											function changeColor7() {
+												BTN7.style.background = (BTN7.style.background == "green")?'green':'green';
+											}
+											function changeColor8() {
+												if(temp_light_gate2 == 0){
+													if(BTN8.style.background == "white"){
+														BTN8.style.background = "yellow";
+														Tempt_chart09.style.display = 'none';
+													}else{
+														BTN8.style.background = "white";
+														Tempt_chart09.style.display = 'block';
+													}
+												}
+											}
+											function changeColor9() {
+												if(BTN8.style.background == "yellow"){
+													if(BTN9.style.background == "white"){
+														BTN9.style.background = "red";
+														Tempt_chart08.style.display = 'none';
+														temp_light_gate2 = 1;
+													}else{
+														BTN9.style.background = 'white';
+														Tempt_chart08.style.display = "block";
+														temp_light_gate2 = 0;
+													}
+												}
+											}
+										</script>
+									</div>
+
+									<hr/>
+									<h2 id="co22">室內環境</h2>
+									<h3>Co2</h3>
+									<div class ="temp_chart_index" style=" position:relative">
+										<div style="justify-content: center; width: 100%;  display: block; position:relative ">
+											<svg id="Temperature_chart10" style="position:absolute; z-index=7 top=0;left=0;"></svg>
+											<script>
+												const tempt_chart10 = document.querySelector('#Temperature_chart10');
+												new chartXkcd.Line(tempt_chart10, {
+													title: '每日高低Co2', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [
+														{
+														label: '室內-高',
+														data: [{{everyday_Room_hi.7.co2}}, {{everyday_Room_hi.6.co2}}, {{everyday_Room_hi.5.co2}}, {{everyday_Room_hi.4.co2}}, {{everyday_Room_hi.3.co2}}, {{everyday_Room_hi.2.co2}}, {{everyday_Room_hi.1.co2}}, {{everyday_Room_hi.0.co2}}],
+													},{
+														label: '室內-低',
+														data: [{{everyday_Room_lo.7.co2}}, {{everyday_Room_lo.6.co2}}, {{everyday_Room_lo.5.co2}}, {{everyday_Room_lo.4.co2}}, {{everyday_Room_lo.3.co2}}, {{everyday_Room_lo.2.co2}}, {{everyday_Room_lo.1.co2}}, {{everyday_Room_lo.0.co2}}],
+													}
+													],
+													},
+													options: { 
+													dataColors: ["#f40707","#0441f5"],
+													yTickCount: 2,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart11" style="position:absolute ; top=0;left=0;z-index=8"></svg>
+											<script>
+												const tempt_chart11 = document.querySelector('#Temperature_chart11');
+												new chartXkcd.Bar(tempt_chart11, {
+													title: '每天平均Co2', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{everyday_Room_average.7.co2}}, {{everyday_Room_average.6.co2}}, {{everyday_Room_average.5.co2}}, {{everyday_Room_average.4.co2}}, {{everyday_Room_average.3.co2}}, {{everyday_Room_average.2.co2}}, {{everyday_Room_average.1.co2}}, {{everyday_Room_average.0.co2}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart12" style="position:absolute ; top=0;left=0; z-index=9"></svg>
+											<script>
+												const tempt_chart12 = document.querySelector('#Temperature_chart12');
+												new chartXkcd.Bar(tempt_chart12, {
+													title: '每天 '+{{now_time}}+'時的Co2', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{now_time_Roomdata.7.co2}}, {{now_time_Roomdata.6.co2}}, {{now_time_Roomdata.5.co2}}, {{now_time_Roomdata.4.co2}}, {{now_time_Roomdata.3.co2}}, {{now_time_Roomdata.2.co2}}, {{now_time_Roomdata.1.co2}}, {{now_time_Roomdata.0.co2}} ],
+													}],
+													},
+													options: { 
+													//backgroundColor: '#789b73',
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+										</div>
+										<div style="position:relative; top:100%; justify-content: center; width: 100%; display: flex;" >
+											<div id="dot10" class="change_dot" onclick="changeColor10()" style="background-color: green;" ></div>
+											<div id="dot11" class="change_dot" onclick="changeColor11()" ></div>
+											<div id="dot12" class="change_dot" onclick="changeColor12()" ></div>
+										</div>
+										<script>
+											var temp_light_gate3=0;
+											const BTN10 = document.querySelector('#dot10');
+											const BTN11 = document.querySelector('#dot11');
+											const BTN12 = document.querySelector('#dot12');
+											const Tempt_chart11 = document.querySelector('#Temperature_chart11');
+											const Tempt_chart12 = document.querySelector('#Temperature_chart12');
+
+											function changeColor10() {
+												BTN10.style.background = (BTN10.style.background == "green")?'green':'green';
+											}
+											function changeColor11() {
+												if(temp_light_gate3 == 0){
+													if(BTN11.style.background == "white"){
+														BTN11.style.background = "yellow";
+														Tempt_chart12.style.display = 'none';
+													}else{
+														BTN11.style.background = "white";
+														Tempt_chart12.style.display = 'block';
+													}
+												}
+											}
+											function changeColor12() {
+												if(BTN11.style.background == "yellow"){
+													if(BTN12.style.background == "white"){
+														BTN12.style.background = "red";
+														Tempt_chart11.style.display = 'none';
+														temp_light_gate3 = 1;
+													}else{
+														BTN12.style.background = 'white';
+														Tempt_chart11.style.display = "block";
+														temp_light_gate3 = 0;
+													}
+												}
+											}
+										</script>
+									</div>
+									
+						
+									<div class="mid_line">-</div>
+									<h3 id="bad_airr">有害氣體</h3>
+									<div class ="temp_chart_index" style=" position:relative">
+										<div style="justify-content: center; width: 100%;  display: block; position:relative ">
+											<svg id="Temperature_chart13" style="position:absolute; z-index=7 top=0;left=0;"></svg>
+											<script>
+												const tempt_chart13 = document.querySelector('#Temperature_chart13');
+												new chartXkcd.Line(tempt_chart13, {
+													title: '每日高低廢氣', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [
+														{
+														label: '室內-高',
+														data: [{{everyday_Room_hi.7.tvoc}}, {{everyday_Room_hi.6.tvoc}}, {{everyday_Room_hi.5.tvoc}}, {{everyday_Room_hi.4.tvoc}}, {{everyday_Room_hi.3.tvoc}}, {{everyday_Room_hi.2.tvoc}}, {{everyday_Room_hi.1.tvoc}}, {{everyday_Room_hi.0.tvoc}}],
+													},{
+														label: '室內-低',
+														data: [{{everyday_Room_lo.7.tvoc}}, {{everyday_Room_lo.6.tvoc}}, {{everyday_Room_lo.5.tvoc}}, {{everyday_Room_lo.4.tvoc}}, {{everyday_Room_lo.3.tvoc}}, {{everyday_Room_lo.2.tvoc}}, {{everyday_Room_lo.1.tvoc}}, {{everyday_Room_lo.0.tvoc}}],
+													}
+													],
+													},
+													options: { 
+													dataColors: ["#f40707","#0441f5"],
+													yTickCount: 2,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart14" style="position:absolute ; top=0;left=0;z-index=8"></svg>
+											<script>
+												const tempt_chart14 = document.querySelector('#Temperature_chart14');
+												new chartXkcd.Bar(tempt_chart14, {
+													title: '每天平均廢氣', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{everyday_Room_average.7.tvoc}}, {{everyday_Room_average.6.tvoc}}, {{everyday_Room_average.5.tvoc}}, {{everyday_Room_average.4.tvoc}}, {{everyday_Room_average.3.tvoc}}, {{everyday_Room_average.2.tvoc}}, {{everyday_Room_average.1.tvoc}}, {{everyday_Room_average.0.tvoc}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart15" style="position:absolute ; top=0;left=0; z-index=9"></svg>
+											<script>
+												const tempt_chart15 = document.querySelector('#Temperature_chart15');
+												new chartXkcd.Bar(tempt_chart15, {
+													title: '每天 '+{{now_time}}+'時的廢氣', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室內',
+														data: [ {{now_time_Roomdata.7.tvoc}}, {{now_time_Roomdata.6.tvoc}}, {{now_time_Roomdata.5.tvoc}}, {{now_time_Roomdata.4.tvoc}}, {{now_time_Roomdata.3.tvoc}}, {{now_time_Roomdata.2.tvoc}}, {{now_time_Roomdata.1.tvoc}}, {{now_time_Roomdata.0.tvoc}} ],
+													}],
+													},
+													options: { 
+													//backgroundColor: '#789b73',
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+										</div>
+										<div style="position:relative; top:100%; justify-content: center; width: 100%; display: flex;" >
+											<div id="dot13" class="change_dot" onclick="changeColor13()" style="background-color: green;" ></div>
+											<div id="dot14" class="change_dot" onclick="changeColor14()" ></div>
+											<div id="dot15" class="change_dot" onclick="changeColor15()" ></div>
+										</div>
+										<script>
+											var temp_light_gate4=0;
+											const BTN13 = document.querySelector('#dot13');
+											const BTN14 = document.querySelector('#dot14');
+											const BTN15 = document.querySelector('#dot15');
+											const Tempt_chart14 = document.querySelector('#Temperature_chart14');
+											const Tempt_chart15 = document.querySelector('#Temperature_chart15');
+
+											function changeColor13() {
+												BTN10.style.background = (BTN10.style.background == "green")?'green':'green';
+											}
+											function changeColor14() {
+												if(temp_light_gate4 == 0){
+													if(BTN14.style.background == "white"){
+														BTN14.style.background = "yellow";
+														Tempt_chart15.style.display = 'none';
+													}else{
+														BTN14.style.background = "white";
+														Tempt_chart15.style.display = 'block';
+													}
+												}
+											}
+											function changeColor15() {
+												if(BTN14.style.background == "yellow"){
+													if(BTN15.style.background == "white"){
+														BTN15.style.background = "red";
+														Tempt_chart14.style.display = 'none';
+														temp_light_gate4 = 1;
+													}else{
+														BTN15.style.background = 'white';
+														Tempt_chart14.style.display = "block";
+														temp_light_gate4 = 0;
+													}
+												}
+											}
+										</script>
+									</div>
+
+									<hr/>
+									<h2 id="uvv">戶外環境</h2>
+									<h3>紫外線</h3>
+									<div class ="temp_chart_index" style=" position:relative">
+										<div style="justify-content: center; width: 100%;  display: block; position:relative ">
+											<svg id="Temperature_chart16" style="position:absolute; z-index=7 top=0;left=0;"></svg>
+											<script>
+												const tempt_chart16 = document.querySelector('#Temperature_chart16');
+												new chartXkcd.Line(tempt_chart16, {
+													title: '每日高低紫外線', 
+													xLabel: 'Date',
+													yLabel: 'Temperature', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [
+														{
+														label: '室外-高',
+														data: [{{everyday_local_hi.7.紫外線}}, {{everyday_local_hi.6.紫外線}}, {{everyday_local_hi.5.紫外線}}, {{everyday_local_hi.4.紫外線}}, {{everyday_local_hi.3.紫外線}}, {{everyday_local_hi.2.紫外線}}, {{everyday_local_hi.1.紫外線}}, {{everyday_local_hi.0.紫外線}}],
+													},{
+														label: '室外-低',
+														data: [{{everyday_local_lo.7.紫外線}}, {{everyday_local_lo.6.紫外線}}, {{everyday_local_lo.5.紫外線}}, {{everyday_local_lo.4.紫外線}}, {{everyday_local_lo.3.紫外線}}, {{everyday_local_lo.2.紫外線}}, {{everyday_local_lo.1.紫外線}}, {{everyday_local_lo.0.紫外線}}],
+													}
+													],
+													},
+													options: { 
+													dataColors: ["#f40707","#0441f5"],
+													yTickCount: 2,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+												
+											</script>
+
+											<svg id="Temperature_chart17" style="position:absolute ; top=0;left=0;z-index=8"></svg>
+											<script>
+												const tempt_chart17 = document.querySelector('#Temperature_chart17');
+												new chartXkcd.Bar(tempt_chart17, {
+													title: '每天平均紫外線', 
+													xLabel: 'Date',
+													yLabel: 'UV', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室外',
+														data: [ {{everyday_local_average.7.紫外線}}, {{everyday_local_average.6.紫外線}}, {{everyday_local_average.5.紫外線}}, {{everyday_local_average.4.紫外線}}, {{everyday_local_average.3.紫外線}}, {{everyday_local_average.2.紫外線}}, {{everyday_local_average.1.紫外線}}, {{everyday_local_average.0.紫外線}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart18" style="position:absolute ; top=0;left=0; z-index=9"></svg>
+											<script>
+												const tempt_chart18 = document.querySelector('#Temperature_chart18');
+												new chartXkcd.Bar(tempt_chart18, {
+													title: '每天 '+{{now_time}}+'時的紫外線',
+													xLabel: 'Date',
+													yLabel: 'UV', 
+													data: {
+														labels:  {{date_list|safe}},
+														datasets: [{
+														label: '室外',
+														data: [ {{now_time_localdata.7.紫外線}}, {{now_time_localdata.6.紫外線}}, {{now_time_localdata.5.紫外線}}, {{now_time_localdata.4.紫外線}}, {{now_time_localdata.3.紫外線}}, {{now_time_localdata.2.紫外線}}, {{now_time_localdata.1.紫外線}}, {{now_time_localdata.0.紫外線}} ],
+														}],
+													},
+													options: { // optional
+														
+														yTickCount: 2,
+													},
+												})
+
+											</script>
+										</div>
+										<div style="position:relative; top:100%; justify-content: center; width: 100%; display: flex;" >
+											<div id="dot16" class="change_dot" onclick="changeColor16()" style="background-color: green;" ></div>
+											<div id="dot17" class="change_dot" onclick="changeColor17()" ></div>
+											<div id="dot18" class="change_dot" onclick="changeColor18()" ></div>
+										</div>
+										<script>
+											var temp_light_gate5=0;
+											const BTN16 = document.querySelector('#dot16');
+											const BTN17 = document.querySelector('#dot17');
+											const BTN18 = document.querySelector('#dot18');
+											const Tempt_chart17 = document.querySelector('#Temperature_chart17');
+											const Tempt_chart18 = document.querySelector('#Temperature_chart18');
+
+											function changeColor16() {
+												BTN16.style.background = (BTN16.style.background == "green")?'green':'green';
+											}
+											function changeColor17() {
+												if(temp_light_gate5 == 0){
+													if(BTN17.style.background == "white"){
+														BTN17.style.background = "yellow";
+														Tempt_chart18.style.display = 'none';
+													}else{
+														BTN17.style.background = "white";
+														Tempt_chart18.style.display = 'block';
+													}
+												}
+											}
+											function changeColor18() {
+												if(BTN17.style.background == "yellow"){
+													if(BTN18.style.background == "white"){
+														BTN18.style.background = "red";
+														Tempt_chart17.style.display = 'none';
+														temp_light_gate5 = 1;
+													}else{
+														BTN18.style.background = 'white';
+														Tempt_chart17.style.display = "block";
+														temp_light_gate5 = 0;
+													}
+												}
+											}
+										</script>
+									</div>
+
+									<div class="mid_line">-</div>
+									<h3 id="rain_windd">雨量&風速</h3>
+									<div class ="temp_chart_index" style=" position:relative">
+										<div style="justify-content: center; width: 100%;  display: block; position:relative ">
+
+											<svg id="Temperature_chart19" style="position:absolute ; top=0;left=0;z-index=8"></svg>
+											<script>
+												const tempt_chart19 = document.querySelector('#Temperature_chart19');
+												new chartXkcd.Bar(tempt_chart19, {
+													title: '每天平均風速', 
+													xLabel: 'Date',
+													yLabel: 's/m', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室外',
+														data: [ {{everyday_local_average.7.風速}}, {{everyday_local_average.6.風速}}, {{everyday_local_average.5.風速}}, {{everyday_local_average.4.風速}}, {{everyday_local_average.3.風速}}, {{everyday_local_average.2.風速}}, {{everyday_local_average.1.風速}}, {{everyday_local_average.0.風速}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+											</script>
+
+											<svg id="Temperature_chart20" style="position:absolute ; top=0;left=0; z-index=9"></svg>
+											<script>
+												const tempt_chart20 = document.querySelector('#Temperature_chart20');
+												new chartXkcd.Bar(tempt_chart20, {
+													title: '每天平均雨量', 
+													xLabel: 'Date',
+													yLabel: 'mm', 
+													data: {
+													labels: {{date_list|safe}},
+													datasets: [{
+														label: '室外',
+														data: [ {{everyday_local_average.7.H_24R}}, {{everyday_local_average.6.H_24R}}, {{everyday_local_average.5.H_24R}}, {{everyday_local_average.4.H_24R}}, {{everyday_local_average.3.H_24R}}, {{everyday_local_average.2.H_24R}}, {{everyday_local_average.1.H_24R}}, {{everyday_local_average.0.H_24R}} ],
+													}],
+													},
+													options: { 
+													yTickCount: 3,
+													legendPosition: chartXkcd.config.positionType.upLeft
+													}
+												})
+
+											</script>
+										</div>
+										<div style="position:relative; top:100%; justify-content: center; width: 100%; display: flex;" >
+											<div id="dot19" class="change_dot" onclick="changeColor19()" style="background-color: purple;" ></div>
+											<div id="dot20" class="change_dot" onclick="changeColor20()" ></div>
+										</div>
+										<script>
+											const BTN19 = document.querySelector('#dot19');
+											const BTN20 = document.querySelector('#dot20');
+											const Tempt_chart19 = document.querySelector('#Temperature_chart19');
+											const Tempt_chart20 = document.querySelector('#Temperature_chart20');
+
+											function changeColor19() {
+												
+												if(BTN19.style.background == "white"){
+													BTN19.style.background = "purple";
+													BTN20.style.background = "white";
+													Tempt_chart20.style.display = 'none';
+												}else{
+													BTN19.style.background = "purple";
+													BTN20.style.background = "white";
+													Tempt_chart20.style.display = 'block';
+												}
+
+											}
+											function changeColor20() {
+												
+												if(BTN20.style.background == "white"){
+													BTN20.style.background = "blue";
+													BTN19.style.background = "white";
+													Tempt_chart20.style.display = 'block';
+												}else{
+													BTN20.style.background = "blue";
+													BTN19.style.background = "white";
+													Tempt_chart20.style.display = 'none';
+												}
+												
+											}
+
+										</script>
+									</div>
+									<div class="mid_line">-</div>
+									
+								</section>
+
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="linker">&copy; Eggplant. Design: <a href="https://www.facebook.com/jiajhanegger">find me!</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+
+	<script src="{% static 'assets/js/vue.js' %}"></script>
+
+	<script>
+		const photo_weather_now = {}
+		weather_photo=Vue.createApp(photo_weather_now);
+		weather_photo.component("change-weather-photo",{
+			delimiters:['[[', ']]'],
+			data(){
+				return {
+				  weather: '{{weather_level.天氣現象}}',  //接收 dic or arr資料
+				  photo_label: {{天氣圖}}					//接收 int 資料
+				}
+			},
+			template:`
+			<div v-if="photo_label == 10" class="weather_main_photo">
+				<span><img src="{% static 'images/weather/light/sun.jpg' %}" alt="" /></span>
+			</div>
+			<div v-else-if="photo_label == 11" class="weather_main_photo">
+				<span><img src="{% static 'images/weather/dark/sun.jpg' %}" alt="" /></span>
+			</div>
+
+			<div v-else-if="photo_label == 20" class="weather_main_photo">
+				<span><img src="{% static 'images/weather/light/rain.jpg' %}" alt="" /></span>
+			</div>
+			<div v-else-if="photo_label == 21" class="weather_main_photo">
+				<span><img src="{% static 'images/weather/dark/rain.jpg' %}" alt="" /></span>
+			</div>
+
+			<div v-else-if="photo_label == 30" class="weather_main_photo">
+				<span><img src="{% static 'images/weather/light/cloud.jpg' %}" alt="" /></span>
+			</div>
+			<div v-else-if="photo_label == 31" class="weather_main_photo">
+				<span><img src="{% static 'images/weather/dark/cloud.jpg' %}" alt="" /></span>
+			</div>
+
+			<div v-else class="weather_main_photo">
+				<span><img src="{% static 'images/weather/light/main.jpg' %}" alt="" /></span>
+			</div>
+			<div v-else class="weather_main_photo">
+				<span><img src="{% static 'images/weather/dark/main.jpg' %}" alt="" /></span>
+			</div>
+			`
+		})
+		weather_photo.mount('#main_photo');
+
+		const w_bar = {}
+		weather_b=Vue.createApp(w_bar);
+		weather_b.component("weather-bar",{
+			delimiters:['[[', ']]'],
+			data(){
+				return {
+				  all_predict_data: {
+					weather_predict : {{weather_predict_future|safe}}
+				  }
+				}
+			},
+			template:`
+			<div class="concent_bar">
+				<div class="bar_box" >	
+					<div class="bar_box_element" v-for="(key , value) in all_predict_data.weather_predict"> 
+						<p>[[value]]</p>
+						<img v-bind:src="[[key.天氣圖案]]" alt="" />
+						<div class="element_rain" v-if="[[key.降雨機率]] >= 30"> <b>降雨機率:[[key.降雨機率]]</b> </div>
+						<div class="element_temp"> <b>[[key.溫度]]&#8451;</b> </div>
+					</div>
+				</div>
+			</div>
+			<div class = "predict_today"> <b>今日: {{today_total_temp_min}}&#8451;~{{today_total_temp_max}}&#8451;</b> </div>
+			<div class = "predict_tomorrow"> <b>明日: {{tomorrow_total_temp_min}}&#8451;~{{tomorrow_total_temp_max}}&#8451;</b> </div>
+			`
+		})
+		weather_b.mount('#weather_predict_bar');
+		
+	</script>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<style>
+  .active {
+      width: 100px;
+      height: 100px;
+      background: green;
+  }
+  </style>
+<body>
+  {% load static %}
+
+  <script src="http://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+
+  <div id="app">
+    [[type]]
+    <div v-if="type === 'A'">
+      <span ><img src="{% static 'images/rain/rain_main.jpg' %}" alt="" /></span>
+    </div>
+    <div v-else-if="type === 'B'">
+      <span><img src="{% static 'images/rain/rain_morning.jpg' %}" alt="" /></span>
+    </div>
+    <div v-else-if="type === 'C'">
+      <span ><img src="{% static 'images/rain/rain_night.jpg' %}" alt="" /></span>
+    </div>
+    <div v-else>
+      
+    </div>
+</div>
+
+
+<div id="ap">
+  <p> [[ message ]] </p>
+  <input v-model="message">
+</div>
+
+<br>
+
+<div id="p">
+  <button @click="awesome = !awesome">toggle</button>
+	<h1 v-if="awesome">Vue is awesome!</h1>
+	<h1 v-else>Oh no 😢</h1>
+</div>
+
+
+<div id="app1">
+  <ol>
+    <li v-for="(site, index) in sites">
+      [[ index ]] - [[ site.text ]]
+    </li>
+  </ol>
+  <ul>
+
+  <template v-for="site in sites">
+    <li> [[ site.text ]] </li>
+    <li>--------------</li>
+  </template>
+</div>
+
+
+<div id="app2">
+  <ul>
+    <li v-for="(value, key , index) in object">
+    [[ value ]]<br>
+    [[ index ]]. [[key]] : [[value]]
+    </li>
+  </ul>
+</div>
+
+
+<div id="app3">
+  <ul>
+    <li v-for="n in evenNumbers">[[ n ]]</li>
+  </ul>
+</div>
+
+
+<div id="app4">
+  <select @change="changeVal($event)" v-model="selOption">
+     <template v-for="(site,index) in sites" :site="site" :index="index" :key="site.id">
+        <!-- 索引为 1 的设为默认值，索引值从0 开始-->
+        <option v-if = "index == 1" :value="site.name" selected>[[site.name]]</option>
+        <option v-else :value="site.name">[[site.name]]</option>
+     </template>
+  </select>
+  <div>您选中了:[[selOption]]</div>
+</div>
+
+
+
+<div id="app5">
+  <div :class="{ 'active': isActive }"></div>
+</div>
+
+
+<div id="app6">
+  {{ info }}
+</div>
+
+<!--------------------------------------------------------------------------------------------------------->
+<script>
+  
+const app = {
+  delimiters:['[[', ']]'],
+  data() {
+    return {
+      type: '{{type_back}}'
+    }
+  }
+}
+Vue.createApp(app).mount('#app')
+
+
+const ap = {
+  delimiters:['[[', ']]'],
+  data() {
+    return {
+      message: 'eggplant !'
+    }
+  }
+}
+Vue.createApp(ap).mount('#ap')
+
+
+const p = {
+  delimiters:['[[', ']]'],
+  data() {
+  	return {
+	    awesome: true
+  	}
+	}
+}
+Vue.createApp(p).mount('#p')
+
+
+
+const app1 = {
+  delimiters:['[[', ']]'],
+  data() {
+    return {
+      sites: [
+        { text: 'Google' },
+        { text: 'Runoob' },
+        { text: 'Taobao' }
+      ],
+    }
+  }
+}
+Vue.createApp(app1).mount('#app1')
+
+
+
+const app2 = {
+  delimiters:['[[', ']]'],
+  data() {
+    return {
+      object: {
+        name: 'v-for測試',
+        url: 'https://arduino-web-eggplant.herokuapp.com/main',
+        slogan: '学的不仅是技术，更是梦想！'
+      }
+    }
+  }
+}
+Vue.createApp(app2).mount('#app2')
+
+
+
+const app3 = {
+  delimiters:['[[', ']]'],
+  data() {
+      return {
+          numbers: [ 1, 2, 3, 4, 5 ]
+     }
+  },
+  computed: {
+      evenNumbers() {
+          return this.numbers.filter(number => number % 2 === 0)
+      }
+  }
+}
+Vue.createApp(app3).mount('#app3')
+
+
+
+const app4 = {
+  delimiters:['[[', ']]'],
+  data() {
+      return {
+          selOption: "Runoob",
+          sites: [
+                {id:1,name:"Google"},
+                {id:2,name:"Runoob"},
+                {id:3,name:"Taobao"},
+          ]
+       }
+  },
+  methods:{
+      changeVal:function(event){
+          this.selOption = event.target.value;
+          alert("你选中了"+this.selOption);
+      }
+  }
+}
+Vue.createApp(app4).mount('#app4')
+
+
+const app5 = {
+  data() {
+    return {
+       isActive: true
+    }
+ }
+}
+Vue.createApp(app5).mount('#app5')
+
+const app6 = {
+  data() {
+    return {
+      info: null
+    }
+  },
+  mounted () {
+    axios
+      .get('https://arduino-web-eggplant.herokuapp.com/data_get_test_by_get/?Temperature=1&Humandity=2&PM25=3&Co2=4&TVOC=5')
+      .then(response => (this.info = response))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  }
+}
+Vue.createApp(app6).mount('#app6')
+
+
+</script>
+
+</body>
+</html>
+

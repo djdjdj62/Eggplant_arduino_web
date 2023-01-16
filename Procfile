@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath arduino_web arduino_web.wsgi
