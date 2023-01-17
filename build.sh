@@ -1,4 +1,4 @@
 #!/bin/bash
 pip install --upgrade pip
 pip install -r requirements.txt
-python manage.py collectstatic --no-input
+python arduino_web/manage.py collectstatic --no-input
