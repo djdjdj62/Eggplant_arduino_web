@@ -3,8 +3,8 @@ services:
     name: arduino_web
     env: python
     region: singapore
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn arduino_web.wsgi:application"
     plan: free
     branch: master
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn arduino_web.arduino_web.wsgi:application"
     autoDeploy: true
