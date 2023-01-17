@@ -6,5 +6,5 @@ services:
     plan: free
     branch: master
     buildCommand: "./build.sh"
-    startCommand: "gunicorn arduino_web.wsgi:application"
+    startCommand: "gunicorn arduino_web.arduino_web.wsgi:application"
     autoDeploy: true
