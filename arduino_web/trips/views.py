@@ -636,7 +636,7 @@ def line_bot(request):
                     TextSendMessage(text=replay_str) )
                 if some_one_say == "網站":
                     user_str_head = ( "Master" + some_one + "大人 * > * \n以下是您的網站......\n" )
-                    replay_str = user_str_head+"https://arduino-web-eggplant.herokuapp.com/main"
+                    replay_str = user_str_head+"https://arduino-web.onrender.com/main"
                     
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
@@ -657,7 +657,7 @@ def line_bot(request):
                 if some_one_say not in Line_cmd :
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
-                        TextSendMessage(text="朕 知道了，汝 何不試試 指令查詢? ") )
+                        TextSendMessage(text="本茄 知道了，汝 何不試試 指令查詢? ") )
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
