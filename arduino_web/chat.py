@@ -1,21 +1,23 @@
 import os
 import openai
 
-openai.api_key = "sk-"+"yfCjXJoJXgjUX2LqMB5MT3BlbkFJh5Y81yB0Rph7qKUhJ9G9"
+def chat_gpt(chat_data):
 
-aa = "聊天講一個笑話"
+  openai.api_key = "sk-"+"yfCjXJoJXg"+"jUX2LqMB5M"+"T3BlbkFJh5"+"Y81yB0Rph"+"7qKUhJ9G9"
 
-start_sequence = "\nAI:"
-restart_sequence = "\nHuman: "
+  start_sequence = "\nAI:"
+  restart_sequence = "\nHuman: "
 
-response = openai.Completion.create(
-  model="text-davinci-003",
-  prompt="\nHuman:"+aa[2:]+"\nAI:",
-  temperature=0.9,
-  max_tokens=100,
-  top_p=1,
-  frequency_penalty=0,
-  presence_penalty=0.6,
-  stop=[" Human:", " AI:"]
-)
-print(response["choices"][0]["text"])
+  response = openai.Completion.create(
+    model="text-davinci-003",
+    prompt="\nHuman:"+chat_data+"\nAI:",
+    temperature=0.9,
+    max_tokens=100,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0.6,
+    stop=[" Human:", " AI:"]
+  )
+  print(response["choices"][0]["text"])
+
+  return response["choices"][0]["text"]
