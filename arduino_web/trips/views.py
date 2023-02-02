@@ -504,9 +504,11 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
 
+from chat import chat_gpt
+
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
-Line_cmd = ["房間資訊","更新天氣","天氣資訊","明天天氣","網站","指令查詢"]
+Line_cmd = ["房間資訊","更新天氣","天氣資訊","明天天氣","網站","聊天+您的內容","指令查詢"]
 
 def line_bot(request):
 #例如: data = [{'name': '夏茄子', 'location': '安南'}]   格式 為 list包裹dic，print( data[0]['name'] ) 可取出資料
@@ -655,6 +657,11 @@ def line_bot(request):
 
                 #-------------------------------------------------------------------------------
                 if some_one_say not in Line_cmd :
+                    if some_one_say[:2] == "聊天":
+                        replay_str = chat_gpt(some_one_say[2:]) # 用chatGPT回復傳入的訊息文字
+                        line_bot_api.reply_message(  # 回復傳入的訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=replay_str) )
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                         event.reply_token,
                         TextSendMessage(text="本茄 知道了，汝 何不試試 指令查詢? ") )

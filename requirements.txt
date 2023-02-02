@@ -1,6 +1,7 @@
 gunicorn
 whitenoise
 waitress
+openai
 asgiref==3.5.2
 certifi==2022.5.18.1
 charset-normalizer==2.0.12
