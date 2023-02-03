@@ -455,7 +455,7 @@ def data_get_test_by_get(request):
     pm25 = request.GET['PM25']
     co2 = request.GET['Co2']
     tvoc = request.GET['TVOC']
-    if temperature == 0 and humandity == 0 and pm25 == 0 and co2 == 0 and tvoc ==0 :
+    if temperature == 0 or humandity == 0  : #and pm25 == 0 and co2 == 0 and tvoc ==0
         return HttpResponse('get data not OK')
     #利用arduino定時功能來觸發另外兩個api
     try:
