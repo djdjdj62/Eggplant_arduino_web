@@ -350,8 +350,11 @@ def the_uv_outside(d):
     #世界衛生組織規範 https://www.cwb.gov.tw/Data/knowledge/announce/service13.pdf
     label=['地獄','危險','警戒','安全','優良']
     print("d =",d)
-    d = float(d)
-    print("d =",d)
+    if d == "":
+        return "???"
+    else:
+        d = float(d)
+        print("uv狀態 =",d)
 
     if d >= 11:
         return label[0]

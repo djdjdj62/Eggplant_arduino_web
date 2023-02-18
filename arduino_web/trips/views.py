@@ -427,11 +427,12 @@ def weather_now_by_web(request):
     try:
         api_for_view.PM25_api_now_from_web(Localname)
     except:
-        print("PM25 Request timeout!!!!!!!!!!!!")
+        print("PM25 Request timeout!!!!!!!!!!!!,中央氣象局pm2.5又出包拉")
+        
     try:
         api_for_view.UVI_api_now_from_web(county_name)
     except:
-        print("UVI Request timeout!!!!!!!!!!!!")
+        print("UVI Request timeout!!!!!!!!!!!!,中央氣象局UVI又出包拉")
     #存進 資料庫
     models.insert_local_data( User_name, Localname, api_for_view.weather_data_now_cont['日期'], 
     api_for_view.weather_data_now_cont['時間'], api_for_view.weather_data_now_cont['風向'], api_for_view.weather_data_now_cont['風速'], 
