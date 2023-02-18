@@ -98,6 +98,7 @@ def UVI_api_now_from_web(county_name): #臺南市
     response = requests.get(api_for_uvi_observation)
     uvi_json = response.json()
     uvi_json = uvi_json['records']
+    print(uvi_json)
     for i in uvi_json:
         if i['county'] == county_name:
             uvi_data = i['uvi']

@@ -68,7 +68,7 @@ def the_page(request):
     print( "now_time == ",now_time )
     print( "now_date == ",now_date )
     #print("本日的資料: ",room_data_list['date_data'][now_date])
-    #print( "此時的資料:", room_data_list['time_data'][now_time])
+    print( "此時的資料:", room_data_list['time_data'][now_time])
     date_list=[]
     now_time_Roomdata={}
     now_time_localdata={}
@@ -631,8 +631,7 @@ def line_bot(request):
                     + "\n" + "21到24點:  " +futures_data['天氣現象']["21到24"] 
                     + "\n" + "_______________" )
                     replay_str = user_future_str_head + user_future_str
-                    
-                    
+
 
                     line_bot_api.reply_message(  # 回復傳入的訊息文字
                     event.reply_token,
