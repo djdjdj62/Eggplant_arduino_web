@@ -423,16 +423,21 @@ def weather_future_by_web(request):
 
 #抓取中央氣象局的 目前天氣環境 網路資料
 def weather_now_by_web(request):
+    now_time = time.strftime("%H", t )
     api_for_view.weather_api_now_from_web(Localname)
     try:
         api_for_view.PM25_api_now_from_web(Localname)
     except:
         print("PM25 Request timeout!!!!!!!!!!!!,中央氣象局pm2.5又出包拉")
+        api_for_view.weather_data_now_cont['PM2_5'] = 0.01
+        api_for_view.weather_data_now_cont['PM2_5T'] = now_time
         
     try:
         api_for_view.UVI_api_now_from_web(county_name)
     except:
         print("UVI Request timeout!!!!!!!!!!!!,中央氣象局UVI又出包拉")
+        api_for_view.weather_data_now_cont['紫外線'] = 0.01
+        api_for_view.weather_data_now_cont['紫外線T'] = now_time
     #存進 資料庫
     models.insert_local_data( User_name, Localname, api_for_view.weather_data_now_cont['日期'], 
     api_for_view.weather_data_now_cont['時間'], api_for_view.weather_data_now_cont['風向'], api_for_view.weather_data_now_cont['風速'], 
