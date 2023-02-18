@@ -315,6 +315,12 @@ def the_hot_danger_tab(h,t):
 def the_pm25_concentration(d):
     #用世界衛生組織的標準 https://zh.m.wikipedia.org/zh-tw/%E6%87%B8%E6%B5%AE%E7%B2%92%E5%AD%90
     label=['地獄','危險','警戒','安全','優良']
+    print("pm25值 =",d)
+    if d == "":
+        return "???"
+    else:
+        d = float(d)
+        print("pm25狀態 =",d)
     d = int(float(d))
 
     if d >= 35:
@@ -350,7 +356,7 @@ def the_co2_inside(d):
 def the_uv_outside(d):
     #世界衛生組織規範 https://www.cwb.gov.tw/Data/knowledge/announce/service13.pdf
     label=['地獄','危險','警戒','安全','優良']
-    print("d =",d)
+    print("uv值 =",d)
     if d == "":
         return "???"
     else:
